@@ -1,0 +1,119 @@
+body{
+    font-family: stencil;
+    background-image: url(fond.jpg);
+}
+
+td {
+    background-color: darkgray;
+    width: 80px;
+    height: 80px;
+}
+
+table {
+    background-color: rgba(211, 211, 211, 0.5);
+    border-collapse: separate;
+    border-spacing: 5px;
+    padding: black;
+}
+
+h1 {
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.5);
+    width: 300px;
+    padding: 5px;
+    margin: 0px;
+    color: darkgreen;
+}
+
+.centre {
+    display: flex;
+    justify-content: center;
+}
+
+#tempsRestant {
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.5);
+    width: 300px;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 64px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#led {
+    background: rgba(211, 211, 211, 0.5);
+    height:60px;
+    width:30px;
+    border-radius: 120px 0px 0px 120px;
+}
+
+#ledinvisible {
+    width:30px;
+}
+
+.go_rouge {
+    border-radius: 0px 45px 0px 45px;
+    background-color: darkred;
+}
+
+.go_vert {
+    border-radius: 0px 45px 0px 45px;
+    background-color: darkgreen;
+}
+
+.go_orange {
+    border-radius: 0px 45px 0px 45px;
+    background-color: darkorange;
+}
+
+.go_blanc {
+    border-radius: 0px 45px 0px 45px;
+    background-color: white;
+}
+
+.go_bleu {
+    border-radius: 0px 45px 0px 45px;
+    background-color: darkblue;
+}
+
+.go_noir {
+    border-radius: 0px 45px 0px 45px;
+    background-color: black;
+}
+
+#audio {
+    display: none;
+}
+
+.go_rouge:hover, .go_vert:hover, .go_orange:hover, .go_blanc:hover, .go_bleu:hover, .go_noir:hover{
+    cursor: move;
+} 
+
+.rouge {
+    background-color: darkred;
+}
+
+.vert {
+    background-color: darkgreen;
+}
+
+.orange {
+    background-color: darkorange;
+}
+
+.blanc {
+    background-color: white;
+}
+
+.bleu {
+    background-color: darkblue;
+}
+
+.noir {
+    background-color: black;
+}
+
+.rouge:hover, .vert:hover, .orange:hover, .blanc:hover, .noir:hover, .bleu:hover{
+    cursor: copy;
+}
