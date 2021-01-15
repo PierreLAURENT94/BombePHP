@@ -92,6 +92,8 @@ function remettreParDefaut(){
     var thisSauvClass = this.className;
     var LengthSauvClass = document.getElementsByClassName(thisSauvClass).length;
     for(tour=0;tour <= LengthSauvClass - 1; tour++){
+        document.getElementsByClassName(thisSauvClass)[0].classList.add("gris");
+        document.getElementsByClassName(thisSauvClass)[0].addEventListener("mouseover", appliquerCouleur);
         document.getElementsByClassName(thisSauvClass)[0].removeEventListener("click", remettreParDefaut);
         document.getElementsByClassName(thisSauvClass)[0].classList.remove(thisSauvClass);
     }
@@ -121,11 +123,7 @@ for(tour=0;tour <= document.getElementsByClassName("bleu").length - 1; tour++){
     document.getElementsByClassName("bleu")[tour].addEventListener("click", remettreParDefaut);
 }
 
-for(tour=0;tour <= document.getElementsByClassName("bleu").length - 1; tour++){
-    document.getElementsByClassName("bleu")[tour].addEventListener("click", remettreParDefaut);
-}
-
-var SourisAppuyéeValeur
+var SourisAppuyéeValeur;
 
 function SourisAppuyée(){
     SourisAppuyéeValeur = true;
@@ -133,17 +131,40 @@ function SourisAppuyée(){
 
 function SourisRelachée(){
     SourisAppuyéeValeur = false;
+    //go_couleur = "aucune"
 }
 
 document.body.addEventListener("mousedown", SourisAppuyée);
 document.body.addEventListener("mouseup", SourisRelachée);
 
-function appliquerCouleur(){
+for(tour=0;tour <= document.getElementsByTagName("td").length - 1; tour++){
+    if(document.getElementsByTagName("td")[tour].className == ""){
+        document.getElementsByTagName("td")[tour].className = "gris";
+    }
+}
 
+function appliquerCouleur(){
+    if(SourisAppuyéeValeur){
+        if(this.className == "gris" && go_couleur != "aucune"){
+            this.classList.remove("gris");
+            this.classList.add(go_couleur);
+            this.removeEventListener("mouseover", appliquerCouleur);
+            this.addEventListener("click", remettreParDefaut);
+        }
+    }
+}
+
+for(tour=0;tour <= document.getElementsByClassName("gris").length - 1; tour++){
+    document.getElementsByClassName("gris")[tour].addEventListener("mouseover", appliquerCouleur);
+}
+
+function verefierConx(couleur){
+    switch(couleur){
+        case "rouge":
+            
+    }
 }
 
 for(tour=0;tour <= document.getElementsByTagName("td").length - 1; tour++){
-    if(document.getElementsByTagName("td")[tour].className == ""){
-        document.getElementsByTagName("td")[tour].className = "noir";
-    }
+    document.getElementsByTagName("td")[tour].id = tour + 1;
 }

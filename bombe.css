@@ -117,3 +117,26 @@ h1 {
 .rouge:hover, .vert:hover, .orange:hover, .blanc:hover, .noir:hover, .bleu:hover{
     cursor: copy;
 }
+
+.cstat {
+    background-color: rgba(211, 211, 211, 0.5);
+}
+
+.stat {
+    background-color: darkred;
+    margin: 5px;
+    color:  rgba(211, 211, 211, 1);
+}
+
+.ok {
+    background-color: darkgreen !important;
+}
+
+h3 {
+    width: fit-content;
+    background-color: rgba(211, 211, 211, 0.5);
+}
+
+#json {
+    display: none;
+}
