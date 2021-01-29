@@ -61,31 +61,31 @@ function goClick(){
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_rouge").length - 1; tour++){
-    document.getElementsByClassName("go_rouge")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_rouge")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_vert").length - 1; tour++){
-    document.getElementsByClassName("go_vert")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_vert")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_orange").length - 1; tour++){
-    document.getElementsByClassName("go_orange")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_orange")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_blanc").length - 1; tour++){
-    document.getElementsByClassName("go_blanc")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_blanc")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_noir").length - 1; tour++){
-    document.getElementsByClassName("go_noir")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_noir")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_bleu").length - 1; tour++){
-    document.getElementsByClassName("go_bleu")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_bleu")[tour].addEventListener("mousedown", goClick);
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_bleu").length - 1; tour++){
-    document.getElementsByClassName("go_bleu")[tour].addEventListener("click", goClick);
+    document.getElementsByClassName("go_bleu")[tour].addEventListener("mousedown", goClick);
 }
 
 function remettreParDefaut(){
@@ -158,13 +158,36 @@ for(tour=0;tour <= document.getElementsByClassName("gris").length - 1; tour++){
     document.getElementsByClassName("gris")[tour].addEventListener("mouseover", appliquerCouleur);
 }
 
-function verefierConx(couleur){
-    switch(couleur){
-        case "rouge":
-            
-    }
-}
+var v_encore = true;
+var colonne = 1;
+var ligne = 1;
+var v_colonne;
+var v_ligne;
 
 for(tour=0;tour <= document.getElementsByTagName("td").length - 1; tour++){
-    document.getElementsByTagName("td")[tour].id = tour + 1;
+    if(colonne > 6){
+        colonne = 1;
+        ligne++;
+    }
+    document.getElementsByTagName("td")[tour].id = String(ligne) + String(colonne);
+    colonne++;
 }
+
+function verefierConx(couleur){
+    coordonneesDepart = RecupererColonneLigne(document.getElementsByClassName("go_" + couleur)[0].id);
+    coordonneesArrive = RecupererColonneLigne(document.getElementsByClassName("go_" + couleur)[1].id);
+    while(v_encore){
+        
+    }
+    v_encore = true;
+}
+
+function RecupererColonneLigne(colonneLigneBrut){
+    colonneLigneBrut = String(colonneLigneBrut);
+    return {
+        colonne: colonneLigneBrut.substring(1),
+        ligne: colonneLigneBrut.substring(0, 1)
+    };
+}
+
+//verefierConx("rouge");

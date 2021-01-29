@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "Bombe-STENCIL-NORMAL";
+    src: url("STENCIL.woff");
+}
+
 body{
-    font-family: stencil;
+    font-family: Bombe-STENCIL-NORMAL;
     background-image: url(fond.jpg);
 }
 
@@ -135,6 +140,7 @@ h1 {
 h3 {
     width: fit-content;
     background-color: rgba(211, 211, 211, 0.5);
+    margin-top: 0px;
 }
 
 #json {
