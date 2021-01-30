@@ -163,6 +163,9 @@ var colonne = 1;
 var ligne = 1;
 var v_colonne;
 var v_ligne;
+var coordonnesActuelle;
+var coordonneesDepart;
+var coordonneesArrive;
 
 for(tour=0;tour <= document.getElementsByTagName("td").length - 1; tour++){
     if(colonne > 6){
@@ -173,13 +176,61 @@ for(tour=0;tour <= document.getElementsByTagName("td").length - 1; tour++){
     colonne++;
 }
 
+var v_gauche;
+var v_droite;
+var v_bas;
+var v_haut;
+var coordonnesActuelleDebut;
+var listeDesDejaFait;
+var v_EstOK;
+
 function verefierConx(couleur){
     coordonneesDepart = RecupererColonneLigne(document.getElementsByClassName("go_" + couleur)[0].id);
     coordonneesArrive = RecupererColonneLigne(document.getElementsByClassName("go_" + couleur)[1].id);
-    while(v_encore){
-        
-    }
+    coordonnesActuelle = coordonneesDepart;
+    listeDesDejaFait = [];
+    v_EstOK = false;
     v_encore = true;
+    while(v_encore){
+        coordonnesActuelleDebut = coordonnesActuelle;
+        v_gauche = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne - 1));
+        v_droite = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne + 1));
+        v_bas = document.getElementById(String(coordonnesActuelle.ligne + 1) + String(coordonnesActuelle.colonne));
+        v_haut = document.getElementById(String(coordonnesActuelle.ligne - 1) + String(coordonnesActuelle.colonne));
+
+        if(v_gauche != null){
+            if(v_gauche.className == couleur || v_gauche.className == "go_" + couleur){
+                coordonnesActuelle = RecupererColonneLigne(v_gauche.id);
+            }
+        }
+        if(v_droite != null){
+            if(v_droite.className == couleur || v_droite.className == "go_" + couleur){
+                coordonnesActuelle = RecupererColonneLigne(v_droite.id);
+            }
+        }
+        if(v_bas != null){
+            if(v_bas.className == couleur || v_bas.className == "go_" + couleur){
+                coordonnesActuelle = RecupererColonneLigne(v_bas.id);
+            }
+        }
+        if(v_haut != null){
+            if(v_haut.className == couleur || v_haut.className == "go_" + couleur){
+                coordonnesActuelle = RecupererColonneLigne(v_haut.id);
+            }
+        }
+        
+        if(coordonnesActuelleDebut == coordonnesActuelle){
+            v_encore = false;
+        }
+        else if(coordonneesArrive == coordonnesActuelle){
+            v_encore = false;
+
+        }
+        else{
+            listeDesDejaFait.add(coordonnesActuelle)
+        }
+    }
+    
 }
 
 function RecupererColonneLigne(colonneLigneBrut){
