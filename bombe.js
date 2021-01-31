@@ -97,6 +97,7 @@ function remettreParDefaut(){
         document.getElementsByClassName(thisSauvClass)[0].removeEventListener("click", remettreParDefaut);
         document.getElementsByClassName(thisSauvClass)[0].classList.remove(thisSauvClass);
     }
+    document.getElementById("Stat_" + thisSauvClass).classList.remove("ok");
 }
 
 for(tour=0;tour <= document.getElementsByClassName("rouge").length - 1; tour++){
@@ -150,6 +151,7 @@ function appliquerCouleur(){
             this.classList.add(go_couleur);
             this.removeEventListener("mouseover", appliquerCouleur);
             this.addEventListener("click", remettreParDefaut);
+            verefierConx(go_couleur);
         }
     }
 }
@@ -191,12 +193,38 @@ function verefierConx(couleur){
     listeDesDejaFait = [];
     v_EstOK = false;
     v_encore = true;
+    var secu = 0;
+    console.log("---NEW---");
     while(v_encore){
+        console.log(coordonnesActuelle);
         coordonnesActuelleDebut = coordonnesActuelle;
         v_gauche = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne - 1));
         v_droite = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne + 1));
         v_bas = document.getElementById(String(coordonnesActuelle.ligne + 1) + String(coordonnesActuelle.colonne));
         v_haut = document.getElementById(String(coordonnesActuelle.ligne - 1) + String(coordonnesActuelle.colonne));
+        if(v_gauche != null){
+            if(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_gauche.id))){
+                v_gauche = null;
+            }
+        }
+        if(v_droite != null){
+            if(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_droite.id))){
+                v_droite = null;
+            }
+        }
+        if(v_bas != null){
+            if(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_bas.id))){
+                v_bas = null;
+            }
+        }
+        if(v_haut != null){
+            console.log("@@@");
+            console.log(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_haut.id)));
+            console.log("@@@");
+            if(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_haut.id))){
+                v_haut = null;
+            }
+        }
 
         if(v_gauche != null){
             if(v_gauche.className == couleur || v_gauche.className == "go_" + couleur){
@@ -213,32 +241,54 @@ function verefierConx(couleur){
                 coordonnesActuelle = RecupererColonneLigne(v_bas.id);
             }
         }
+        console.log("___");
+        console.log(v_haut);
+        console.log("___");
         if(v_haut != null){
             if(v_haut.className == couleur || v_haut.className == "go_" + couleur){
                 coordonnesActuelle = RecupererColonneLigne(v_haut.id);
             }
         }
-        
-        if(coordonnesActuelleDebut == coordonnesActuelle){
+        if(coordonneesArrive.colonne == coordonnesActuelle.colonne && coordonneesArrive.ligne == coordonnesActuelle.ligne){
             v_encore = false;
+            CouleurValide(couleur);
         }
-        else if(coordonneesArrive == coordonnesActuelle){
+        else if(coordonnesActuelleDebut == coordonnesActuelle){
             v_encore = false;
-
+            CouleurNonValide(couleur);
         }
         else{
-            listeDesDejaFait.add(coordonnesActuelle)
+            listeDesDejaFait.push(coordonnesActuelle);
+            console.log(listeDesDejaFait);
         }
     }
-    
+}
+
+function EstDejaDansListe(liste, qui){
+        for(const element of liste) {
+            console.log("777")
+            console.log(element)
+            console.log(qui)
+            console.log("777")
+            if(element.colonne == qui.colonne && element.ligne == qui.ligne){
+                return true;
+            }
+        }
+        return false;
+}
+
+function CouleurValide(couleur){
+    document.getElementById("Stat_" + couleur).classList.add("ok");
+}
+
+function CouleurNonValide(couleur){
+    document.getElementById("Stat_" + couleur).classList.remove("ok");
 }
 
 function RecupererColonneLigne(colonneLigneBrut){
     colonneLigneBrut = String(colonneLigneBrut);
     return {
-        colonne: colonneLigneBrut.substring(1),
-        ligne: colonneLigneBrut.substring(0, 1)
+        colonne: Number(colonneLigneBrut.substring(1)),
+        ligne: Number(colonneLigneBrut.substring(0, 1))
     };
 }
-
-//verefierConx("rouge");
