@@ -1,0 +1,58 @@
+@font-face {
+    font-family: "Bombe-STENCIL-NORMAL";
+    src: url("STENCIL.woff");
+}
+
+body{
+    font-family: Bombe-STENCIL-NORMAL;
+    background-image: url(fond.jpg);
+}
+
+h1 {
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.5);
+    width: 300px;
+    padding: 5px;
+    margin: 0px;
+    color: darkgreen;
+}
+
+table {
+    background-color: rgba(211, 211, 211, 0.5);
+    border-spacing: 8px;
+    border-collapse: separate;
+    text-align: center;
+}
+
+td{
+    background-color: rgba(0, 100, 0, 0.5);
+    font-size: 22px;
+}
+
+th{
+    background-color: rgba(139, 0, 0, 0.5);
+    font-size: 26px;
+}
+
+#aller{
+    background-color: rgba(0, 0, 139, 0.5);
+}
+
+h3 {
+    width: fit-content;
+    background-color: rgba(211, 211, 211, 0.5);
+    margin-top: 0px;
+}
+
+.centre {
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    color: white;
+  }
+
+a:visited{
+    color: black;
+  }

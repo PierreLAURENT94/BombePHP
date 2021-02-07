@@ -1,20 +1,29 @@
 var seconde = document.getElementById("tempsRestant_seconde").innerHTML;
 var seconde100m = seconde * 10;
+var pasOK = true;
 
 function tempsAct() {
-    seconde100m = seconde100m - 1;
-    document.getElementById("tempsRestant_seconde").innerHTML = Math.trunc(seconde100m / 10);
-    document.getElementById("tempsRestant_secondecentieme").innerHTML = seconde100m.toString().substring(seconde100m.toString().length - 1);
-    if(seconde100m == 0){
-        animeFinTemps();
-        document.getElementById("boom").play();
+    if(pasOK){
+        seconde100m = seconde100m - 1;
+        document.getElementById("tempsRestant_seconde").innerHTML = Math.trunc(seconde100m / 10);
+        document.getElementById("tempsRestant_secondecentieme").innerHTML = seconde100m.toString().substring(seconde100m.toString().length - 1);
+        if(seconde100m == 0){
+            animeFinTemps();
+            document.getElementById("boom").play();
+            setTimeout(Retourner, 3000);
+        }
+        else{
+            setTimeout(tempsAct, 100);
+        }
+        if(seconde100m.toString().substring(seconde100m.toString().length - 1) == 0){
+            document.getElementById("bip").play();
+            animeLed();
+        }
     }
     else{
-        setTimeout(tempsAct, 100);
-    }
-    if(seconde100m.toString().substring(seconde100m.toString().length - 1) == 0){
-        document.getElementById("bip").play();
-        animeLed();
+        animeFinTemps();
+        document.getElementById("win").play();
+        setTimeout(Retourner, 3000);
     }
 }
 
@@ -132,7 +141,6 @@ function SourisAppuyée(){
 
 function SourisRelachée(){
     SourisAppuyéeValeur = false;
-    //go_couleur = "aucune"
 }
 
 document.body.addEventListener("mousedown", SourisAppuyée);
@@ -191,12 +199,10 @@ function verefierConx(couleur){
     coordonneesArrive = RecupererColonneLigne(document.getElementsByClassName("go_" + couleur)[1].id);
     coordonnesActuelle = coordonneesDepart;
     listeDesDejaFait = [];
+    listeDesDejaFait.push(coordonnesActuelle); // EUREKA 😇
     v_EstOK = false;
     v_encore = true;
-    var secu = 0;
-    console.log("---NEW---");
     while(v_encore){
-        console.log(coordonnesActuelle);
         coordonnesActuelleDebut = coordonnesActuelle;
         v_gauche = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne - 1));
         v_droite = document.getElementById(String(coordonnesActuelle.ligne) + String(coordonnesActuelle.colonne + 1));
@@ -218,9 +224,6 @@ function verefierConx(couleur){
             }
         }
         if(v_haut != null){
-            console.log("@@@");
-            console.log(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_haut.id)));
-            console.log("@@@");
             if(EstDejaDansListe(listeDesDejaFait, RecupererColonneLigne(v_haut.id))){
                 v_haut = null;
             }
@@ -241,9 +244,6 @@ function verefierConx(couleur){
                 coordonnesActuelle = RecupererColonneLigne(v_bas.id);
             }
         }
-        console.log("___");
-        console.log(v_haut);
-        console.log("___");
         if(v_haut != null){
             if(v_haut.className == couleur || v_haut.className == "go_" + couleur){
                 coordonnesActuelle = RecupererColonneLigne(v_haut.id);
@@ -259,17 +259,12 @@ function verefierConx(couleur){
         }
         else{
             listeDesDejaFait.push(coordonnesActuelle);
-            console.log(listeDesDejaFait);
         }
     }
 }
 
 function EstDejaDansListe(liste, qui){
-        for(const element of liste) {
-            console.log("777")
-            console.log(element)
-            console.log(qui)
-            console.log("777")
+        for(element of liste) {
             if(element.colonne == qui.colonne && element.ligne == qui.ligne){
                 return true;
             }
@@ -279,6 +274,7 @@ function EstDejaDansListe(liste, qui){
 
 function CouleurValide(couleur){
     document.getElementById("Stat_" + couleur).classList.add("ok");
+    EstOK();
 }
 
 function CouleurNonValide(couleur){
@@ -291,4 +287,14 @@ function RecupererColonneLigne(colonneLigneBrut){
         colonne: Number(colonneLigneBrut.substring(1)),
         ligne: Number(colonneLigneBrut.substring(0, 1))
     };
+}
+
+function EstOK(){
+    if(document.getElementById("Stat_rouge").classList.contains("ok") && document.getElementById("Stat_vert").classList.contains("ok") && document.getElementById("Stat_orange").classList.contains("ok") && document.getElementById("Stat_blanc").classList.contains("ok") && document.getElementById("Stat_noir").classList.contains("ok") && document.getElementById("Stat_bleu").classList.contains("ok")){
+        pasOK = false;
+    }
+}
+
+function Retourner(){
+    
 }

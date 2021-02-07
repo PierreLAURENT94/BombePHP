@@ -30,6 +30,15 @@ h1 {
     color: darkgreen;
 }
 
+h2 {
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.5);
+    width: 300px;
+    padding: 5px;
+    margin: 0px;
+    color: darkblue;
+}
+
 .centre {
     display: flex;
     justify-content: center;
@@ -141,8 +150,4 @@ h3 {
     width: fit-content;
     background-color: rgba(211, 211, 211, 0.5);
     margin-top: 0px;
-}
-
-#json {
-    display: none;
 }
