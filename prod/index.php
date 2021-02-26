@@ -1,4 +1,6 @@
 <?php 
+    // niveau exemple:
+    // INSERT INTO `niveau` (`id_niveau`, `id_utilisateur_createur`, `nom`, `record`, `id_utilisateur_record`, `temps_max`, `rouge1`, `rouge2`, `vert1`, `vert2`, `orange1`, `orange2`, `blanc1`, `blanc2`, `noir1`, `noir2`, `bleu1`, `bleu2`) VALUES (NULL, '1', 'Test_Niv', '129', '1', '300', '23', '62', '16', '36', '42', '66', '43', '56', '11', '32', '15', '46');
     $mysqli = new mysqli("localhost", "bombephp", "bombephp", "bombephp");
 
     foreach($_POST as $nom => $contenu){
@@ -17,7 +19,7 @@
             setcookie("session", $session, 2147483647);
             $rep = $res->fetch_assoc();
             $id_utilisateur = $rep["id_utilisateur"];
-            $mysqli->query("UPDATE utilisateur SET session='$session' WHERE utilisateur.id_utilisateur='$id_utilisateur'");
+            $mysqli->query("UPDATE utilisateur SET session='$session' WHERE id_utilisateur='$id_utilisateur'");
             header("Location:index.php");
         }
         else{
@@ -38,7 +40,7 @@
                 setcookie("session", $session, 2147483647);
                 $rep = $res->fetch_assoc();
                 $id_utilisateur = $rep["id_utilisateur"];
-                $mysqli->query("UPDATE utilisateur SET session='$session' WHERE utilisateur.id_utilisateur='$id_utilisateur'");
+                $mysqli->query("UPDATE utilisateur SET session='$session' WHERE id_utilisateur='$id_utilisateur'");
                 header("Location:index.php");
             }
             else{
@@ -57,7 +59,7 @@
         $res = $mysqli->query("SELECT id_utilisateur FROM utilisateur WHERE pseudo='$pseudo'");
         $rep = $res->fetch_assoc();
         $id_utilisateur = $rep["id_utilisateur"];
-        $mysqli->query("UPDATE utilisateur SET session=NULL WHERE utilisateur.id_utilisateur='$id_utilisateur'");
+        $mysqli->query("UPDATE utilisateur SET session=NULL WHERE id_utilisateur='$id_utilisateur'");
         header("Location:index.php");
     }
 
@@ -67,6 +69,18 @@
         $rep = $res->fetch_assoc();
         if($rep["session"] == $_COOKIE["session"]){
             $pseudo_connecte = $pseudo_test;
+        }
+    }
+
+    if(isset($pseudo_connecte)){
+        if(isset($score) && isset($id_niveau_score)){
+            $res = $mysqli->query("SELECT record FROM niveau WHERE id_niveau=$id_niveau_score");
+            $rep = $res->fetch_assoc();
+            if($rep["record"] < $score){
+                $res_id_utilisateur = $mysqli->query("SELECT id_utilisateur FROM utilisateur WHERE pseudo='$pseudo_connecte'");
+                $rep_id_utilisateur = $res_id_utilisateur->fetch_assoc();
+                $mysqli->query("UPDATE niveau SET record='$score', id_utilisateur_record='" . $rep_id_utilisateur["id_utilisateur"] . "' WHERE id_niveau='$id_niveau_score'");
+            }
         }
     }
 ?>
@@ -91,20 +105,22 @@
                     <th>Temps maximum</th>
                     <th>Aller</th>
                 </tr>
+                <?php
+                    $res = $mysqli->query("SELECT id_niveau, nom, record, id_utilisateur_record, temps_max FROM niveau");
+                    while($rep = $res->fetch_assoc()){
+                ?>
                 <tr>
-                    <td>Test_Niv</td>
-                    <td>12:9</td>
-                    <td>Universe</td>
-                    <td>30:0</td>
-                    <td id="aller"><a href="https://youtu.be/vUFsHFa2iFk">GO</a></td>
+                    <td><?php echo $rep["nom"]; ?></td>
+                    <td><?php echo substr(strval($rep["record"]), 0, -1) . ":" . substr(strval($rep["record"]), -1); ?></td>
+                    <?php
+                        $res_pseudo = $mysqli->query("SELECT pseudo FROM utilisateur WHERE id_utilisateur='" . $rep["id_utilisateur_record"] ."'");
+                        $rep_pseudo = $res_pseudo->fetch_assoc();
+                    ?>
+                    <td><?php echo $rep_pseudo["pseudo"]; ?></td>
+                    <td><?php echo substr(strval($rep["temps_max"]), 0, -1) . ":" . substr(strval($rep["temps_max"]), -1); ?></td>
+                    <td id="aller"><a href="niveau.php?id_niveau=<?php echo $rep["id_niveau"]; ?>">GO</a></td>
                 </tr>
-                <tr>
-                    <td>Time!</td>
-                    <td>1:2</td>
-                    <td>Lieutenant-AMD</td>
-                    <td>10:0</td>
-                    <td id="aller"><a href="https://youtu.be/vUFsHFa2iFk">GO</a></td>
-                </tr>
+                <?php } ?>
             </table>
         </div>
         <div class="centre">
