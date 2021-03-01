@@ -1,0 +1,5 @@
+INSERT INTO `niveau` (`id_niveau`, `id_utilisateur_createur`, `nom`, `record`, `id_utilisateur_record`, `temps_max`, `rouge1`, `rouge2`, `vert1`, `vert2`, `orange1`, `orange2`, `blanc1`, `blanc2`, `noir1`, `noir2`, `bleu1`, `bleu2`) VALUES (NULL, '1', 'Test_Niv', '10', '1', '300', '23', '62', '16', '36', '42', '66', '43', '56', '11', '32', '15', '46');
+
+INSERT INTO `niveau` (`id_niveau`, `id_utilisateur_createur`, `nom`, `record`, `id_utilisateur_record`, `temps_max`, `rouge1`, `rouge2`, `vert1`, `vert2`, `orange1`, `orange2`, `blanc1`, `blanc2`, `noir1`, `noir2`, `bleu1`, `bleu2`) VALUES (NULL, '1', '>TSNA<', '10', '1', '250', '11', '13', '21', '34', '51', '26', '61', '66', '14', '16', '23', '31');
+
+INSERT INTO `niveau` (`id_niveau`, `id_utilisateur_createur`, `nom`, `record`, `id_utilisateur_record`, `temps_max`, `rouge1`, `rouge2`, `vert1`, `vert2`, `orange1`, `orange2`, `blanc1`, `blanc2`, `noir1`, `noir2`, `bleu1`, `bleu2`) VALUES (NULL, '1', 'SATAN', '10', '1', '666', '21', '66', '52', '63', '13', '46', '41', '61', '15', '26', '11', '56');
