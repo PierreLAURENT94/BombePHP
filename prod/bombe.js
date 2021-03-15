@@ -1,6 +1,7 @@
 var seconde = document.getElementById("tempsRestant_seconde").innerHTML;
 var seconde100m = seconde * 10;
 var pasOK = true;
+var depart = true;
 
 function tempsAct() {
     if(pasOK){
@@ -26,8 +27,6 @@ function tempsAct() {
         setTimeout(Retourner, 3000);
     }
 }
-
-tempsAct();
 
 function animeFinTemps(){
     if(document.getElementById("tempsRestant").style.color == "darkred"){
@@ -67,6 +66,10 @@ var go_couleur = "aucune";
 
 function goClick(){
     go_couleur = this.className.substring(3);
+    if(depart){
+        tempsAct();
+        depart = false;
+    }
 }
 
 for(tour=0;tour <= document.getElementsByClassName("go_rouge").length - 1; tour++){
