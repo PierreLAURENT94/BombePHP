@@ -17,27 +17,6 @@ h1 {
     color: darkgreen;
 }
 
-table {
-    background-color: rgba(211, 211, 211, 0.5);
-    border-spacing: 8px;
-    border-collapse: separate;
-    text-align: center;
-}
-
-td{
-    background-color: rgba(0, 100, 0, 0.5);
-    font-size: 22px;
-}
-
-th{
-    background-color: rgba(139, 0, 0, 0.5);
-    font-size: 26px;
-}
-
-#aller{
-    background-color: rgba(0, 0, 139, 0.5);
-}
-
 h3 {
     width: fit-content;
     background-color: rgba(211, 211, 211, 0.5);
@@ -49,16 +28,8 @@ h3 {
     justify-content: center;
 }
 
-a{
-    color: white;
-  }
-
-a:visited{
-    color: black;
-  }
-
-.compte {
-    background-color: rgba(255, 140, 0, 0.5);
+.nouveau {
+    background-color: rgba(139, 0, 139, 0.5);
 }
 
 input {
@@ -68,11 +39,12 @@ input {
     font-weight: bold;
     font-size: 1.17em;
     font-family: sans-serif;
+    width: 350px;
 }
 
 input::placeholder
 {
-    color: darkgreen;
+    color: darkorange;
     font-style: italic;
 }
 
@@ -82,21 +54,11 @@ input[type=submit] {
     text-decoration: underline;
 }
 
-#pseudo {
-    font-family: sans-serif;
-    font-weight: bold;
+form {
+    background-color: rgba(211, 211, 211, 0.5);
+    padding: 5px;
 }
 
-#deconnexion {
-    font-size: 1.17em;
-    color: black;
-    font-weight: bold;
-}
-
-#supprimer{
+#nouveau_niveau {
     background-color: rgba(139, 0, 0, 0.5);
-}
-
-#creer{
-    background-color: rgba(139, 0, 139, 0.5);
 }
