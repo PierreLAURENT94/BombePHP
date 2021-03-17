@@ -2,7 +2,6 @@
     // niveau exemple:
     // INSERT INTO `niveau` (`id_niveau`, `id_utilisateur_createur`, `nom`, `record`, `id_utilisateur_record`, `temps_max`, `rouge1`, `rouge2`, `vert1`, `vert2`, `orange1`, `orange2`, `blanc1`, `blanc2`, `noir1`, `noir2`, `bleu1`, `bleu2`) VALUES (NULL, '1', 'Test_Niv', '129', '1', '300', '23', '62', '16', '36', '42', '66', '43', '56', '11', '32', '15', '46');
     $mysqli = new mysqli("localhost", "bombephp", "bombephp", "bombephp");
-    var_dump($_POST);
     foreach($_POST as $nomvar => $contenuvar){
         $$nomvar = $contenuvar;
     }
